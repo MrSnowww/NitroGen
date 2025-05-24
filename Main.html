@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Discord Nitro Generator</title>
+  <style>
+    /* Animated gradient background */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-45deg, #000000, #222222, #444444, #111111);
+      background-size: 400% 400%;
+      animation: gradient 8s ease infinite;
+    }
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .container {
+      background-color: rgba(35, 39, 42, 0.95);
+      padding: 30px;
+      border-radius: 10px;
+      width: 420px;
+      text-align: center;
+      box-shadow: 0 0 20px #7289da;
+    }
+
+    h1 {
+      color: #7289da;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #7289da;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #5b6eae;
+    }
+
+    .output {
+      margin-top: 20px;
+      background-color: #1e2124;
+      border: 1px solid #444;
+      padding: 10px;
+      height: 200px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    .valid {
+      color: #43b581;
+      font-weight: bold;
+      animation: pulse 0.8s ease-out;
+    }
+
+    .invalid {
+      color: #f04747;
+      font-weight: bold;
+      animation: shake 0.4s ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      75% { transform: translateX(3px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Discord Nitro Code Generator</h1>
+    <button onclick="generateCodes()">Generate Codes</button>
+    <div class="output" id="output">
+      <!-- Fake codes will appear here -->
+    </div>
+  </div>
+
+  <script>
+    function generateFakeCode() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let code = 'https://discord.gift/';
+      for (let i = 0; i < 16; i++) {
+        code += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      return code;
+    }
+
+    function generateCodes() {
+      const output = document.getElementById('output');
+      output.innerHTML = '';
+      for (let i = 0; i < 10; i++) {
+        setTimeout(() => {
+          const fakeCode = generateFakeCode();
+          const isValid = Math.random() < 0.1; // 10% chance to be "valid"
+          const status = isValid ? 
+            `<span class="valid">[VALID]</span>` : 
+            `<span class="invalid">[INVALID]</span>`;
+          output.innerHTML += `${status} ${fakeCode}<br>`;
+          output.scrollTop = output.scrollHeight;
+        }, i * 500);
+      }
+    }
+  </script>
+
+</body>
+</html>
